@@ -1,5 +1,12 @@
 console.log("main.js caricato – build 1.2v_Geo");
 
+// Controllo minimo: Leaflet caricato?
+if (typeof L === "undefined") {
+  console.error("Leaflet NON è caricato (L undefined)");
+} else {
+  console.log("Leaflet è caricato correttamente");
+}
+
 // MAPPA BASE OSM
 const map = L.map("map").setView([42.5, 12.5], 6);
 
