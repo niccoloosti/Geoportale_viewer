@@ -1,8 +1,6 @@
 console.log("main.js caricato – build 1.2v_Geo");
 
-// ========================
 // MAPPA BASE OSM
-// ========================
 const map = L.map("map").setView([42.5, 12.5], 6);
 
 const baseOSM = L.tileLayer(
@@ -13,13 +11,9 @@ const baseOSM = L.tileLayer(
   }
 );
 
-// attivo di default
 baseOSM.addTo(map);
 
-// ========================
-// OVERLAY: NATURA 2000 – ITALIA (PCN)
-// ========================
-
+// NATURA 2000 – ITALIA (PCN)
 const layerNatura2000 = L.tileLayer.wms(
   "https://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_vn2000.map",
   {
@@ -40,10 +34,7 @@ document
     }
   });
 
-// ========================
-// OVERLAY: IBA – Important Bird Areas (PCN)
-// ========================
-
+// IBA – Important Bird Areas (PCN)
 const layerIBA = L.tileLayer.wms(
   "https://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/IBA.map",
   {
