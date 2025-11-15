@@ -1,66 +1,32 @@
-// ========================
-// MAPPA BASE
-// ========================
-const map = L.map("map").setView([42.0, 12.5], 6);
-
-const base = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19
-});
-base.addTo(map);
+console.log("main.js caricato – build 1.2v_Geo");
 
 // ========================
-// DEMO USA (poligoni vector)
+// MAPPA BASE OSM
 // ========================
-const usaGeojsonUrl =
-  "https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json";
+const map = L.map("map").setView([42.5, 12.5], 6);
 
-let layerUSA = null;
-
-fetch(usaGeojsonUrl)
-  .then((r) => r.json())
-  .then((geojson) => {
-    layerUSA = L.geoJSON(geojson, {
-      style: { color: "red", weight: 1, fillOpacity: 0.1 }
-    });
-  });
-
-document
-  .getElementById("toggleUSA")
-  .addEventListener("change", function (e) {
-    if (e.target.checked) {
-      if (layerUSA) map.addLayer(layerUSA);
-    } else {
-      if (layerUSA) map.removeLayer(layerUSA);
-    }
-  });
-
-// ========================
-// DEMO RASTER
-// ========================
-const layerRaster = L.tileLayer(
-  "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-  { maxZoom: 17 }
+const baseOSM = L.tileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+    maxZoom: 19,
+    attribution: "&copy; OpenStreetMap contributors"
+  }
 );
 
-document
-  .getElementById("toggleRaster")
-  .addEventListener("change", function (e) {
-    if (e.target.checked) {
-      map.addLayer(layerRaster);
-    } else {
-      map.removeLayer(layerRaster);
-    }
-  });
+// attivo di default
+baseOSM.addTo(map);
 
 // ========================
-// NATURA 2000 WMS (place-holder)
+// OVERLAY: NATURA 2000 – ITALIA (PCN)
 // ========================
+
 const layerNatura2000 = L.tileLayer.wms(
-  "https://demo.boundlessgeo.com/geoserver/ows?",
+  "https://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_vn2000.map",
   {
-    layers: "ne:ne",
+    layers: "reti_natura2000",
     format: "image/png",
-    transparent: true
+    transparent: true,
+    opacity: 0.7
   }
 );
 
@@ -75,16 +41,17 @@ document
   });
 
 // ========================
-// IBA – Important Bird Areas
+// OVERLAY: IBA – Important Bird Areas (PCN)
 // ========================
+
 const layerIBA = L.tileLayer.wms(
-  "http://wms.pcn.minambiente.it/ogc?",
+  "https://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/IBA.map",
   {
     layers: "IBA",
     format: "image/png",
     transparent: true,
     version: "1.3.0",
-    crs: L.CRS.EPSG3857
+    opacity: 0.7
   }
 );
 
@@ -97,3 +64,5 @@ document
       map.removeLayer(layerIBA);
     }
   });
+
+console.log("configurazione layer completata – 1.2v_Geo");
