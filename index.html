@@ -2,35 +2,45 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Geoportal vincoli – Prototipo</title>
+  <title>Geoportale vincoli – Prototipo</title>
   <link rel="stylesheet" href="style.css">
 
-  <!-- Leaflet da CDN -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    integrity="sha256-p4NxaOJbHllN+hmNHzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""
   />
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    integrity="sha256-20nQCchB9CooQqIjJZRGuk2/Z9VM+NkiqVN1lvTLZBo="
     crossorigin=""
   ></script>
 </head>
+
 <body>
+  <div id="layerControl">
+    <h3>Layer</h3>
 
-  <div id="sidebar">
-    <h3>Geoportal vincoli – prototipo</h3>
-    <p class="note">
-      Basi cartografiche e primi layer WMS (demo).
-    </p>
+    <label>
+      <input type="checkbox" id="toggleNatura2000">
+      Rete Natura 2000 – Italia
+    </label>
 
-    <h4>Basi cartografiche</h4>
-    <div id="base-layers"></div>
+    <label>
+      <input type="checkbox" id="toggleUSA">
+      Demo Stati USA
+    </label>
 
-    <h4>Vincoli / Overlay</h4>
-    <div id="overlay-layers"></div>
+    <label>
+      <input type="checkbox" id="toggleRaster">
+      Demo raster
+    </label>
+
+    <label>
+      <input type="checkbox" id="toggleIBA">
+      Aree IBA – Important Bird Areas (PCN)
+    </label>
   </div>
 
   <div id="map"></div>
